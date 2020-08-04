@@ -31,7 +31,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">menu1</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/member/memberEnroll">회원가입</a>
                 </li>
 
                 <li class="nav-item">
