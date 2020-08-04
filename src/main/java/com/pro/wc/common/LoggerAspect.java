@@ -26,14 +26,18 @@ public class LoggerAspect {
 		String type = signature.getDeclaringTypeName();
 		String methodName = signature.getName();
 		
-		//joinPoint 전에 실행
-		logger.debug("[IN] {}.{}", type, methodName);
+//		클래스 경로 공통부 제거
+		final String REP = "com.pro.wc.";
+		type = type.replace(REP, "");
 		
-		//joinPoint 실행
+//		joinPoint 전에 실행
+		logger.debug("[Start] {}.{}>", type, methodName);
+		
+//		joinPoint 실행
 		Object obj = joinPoint.proceed();
 		
-		//joinPoint 후에 실행
-		logger.debug("[OUT] {}.{}", type, methodName);
+//		joinPoint 후에 실행
+		logger.debug("[End] {}.{}", type, methodName);
 		
 		return obj;
 	}
