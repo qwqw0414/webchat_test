@@ -4,11 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <!-- ===================== Basic Setting ===================== -->
+<div id="jsp 파일명 아이디로 지정 필수">
 
-<div>
-    <button class="btn btn-block btn-outline-warning" onclick="location = '${pageContext.request.contextPath}/test/msgList'">DB 연동 테스트</button>
+
+
+
 </div>
-
-
 <!-- ===================== Basic Setting ===================== -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

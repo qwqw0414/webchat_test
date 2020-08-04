@@ -1,0 +1,10 @@
+/* Contents */
+content > div#contents{
+    margin-top: 56px;
+    min-height: 600px;
+}
+
+/* Footer */
+footer > div#footer{
+    min-height: 140px;
+}
