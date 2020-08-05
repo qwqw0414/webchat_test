@@ -20,7 +20,7 @@ public class ScurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("woolbro").password("{noop}woolbro").roles("USER");
+		auth.inMemoryAuthentication().withUser("webchat").password("webchat").roles("USER");
 	}
 	
     @Override
@@ -29,9 +29,14 @@ public class ScurityConfig extends WebSecurityConfigurerAdapter {
     }
 	
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+    
+//    @Bean
+//    public BCryptPasswordEncoder passwordEncoder() {
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        return bCryptPasswordEncoder;
+//    }
     
 }
