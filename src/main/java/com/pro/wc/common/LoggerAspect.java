@@ -31,13 +31,13 @@ public class LoggerAspect {
 		type = type.replace(REP, "");
 		
 //		joinPoint 전에 실행
-		logger.debug("[Start] {}.{}>", type, methodName);
+		logger.debug(">> {}.{}", type, methodName);
 		
 //		joinPoint 실행
 		Object obj = joinPoint.proceed();
 		
 //		joinPoint 후에 실행
-		logger.debug("[End] {}.{}", type, methodName);
+		logger.debug("<< {}.{}", type, methodName);
 		
 		return obj;
 	}

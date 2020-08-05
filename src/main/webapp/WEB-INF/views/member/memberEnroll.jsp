@@ -134,7 +134,7 @@ $(()=>{
                 console.log(idValid);
             },
             error: (x, s, e) => {
-                console.log(a, b, c);
+                console.log(x, s, e);
             }
         });
     }
@@ -154,7 +154,7 @@ $(()=>{
                     alert('회원 가입 실패')
             },
             error: (x, s, e) => {
-                console.log(a, b, c);
+                console.log(x, s, e);
             },
             complete: (data) => {
                 location.href = '${pageContext.request.contextPath}/';

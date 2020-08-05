@@ -31,9 +31,15 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <!-- 네비게이션 메뉴 -->
             <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/member/memberEnroll">회원가입</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Member
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberEnroll">회원가입</a>
+                    </div>
                 </li>
 
                 <li class="nav-item">
@@ -48,6 +54,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/jse/sudoku">스도쿠 자동완성</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/jse/regexp">정규식 테스트</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/jse/productView">상품 리스트</a>
                     </div>
                 </li>
 
