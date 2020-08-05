@@ -7,71 +7,109 @@
 <!-- ===================== Basic Setting ===================== -->
 
 <div id="memberEnroll">
-    <input type="hidden" id="idValid" value="0">
-    <input type="text" id="memberId" placeholder="아이디" class="form-control">
-    <br>
-    <span id="msg-valid-id"></span>
-    <br>
-    <input type="password" id="pwd" placeholder="비밀번호" class="form-control">
-    <br>
-    <input type="password" id="pwd_ck" placeholder="비밀번호 확인" class="form-control">
-    <br>
-    <input type="text" id="memberName" placeholder="이름" class="form-control">
-    <br>
-    <button id="submit" class="btn btn-outline-info btn-block">가입</button>
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <!-- 아이디 -->
+                <input type="text" id="memberId" class="form-control" placeholder="아이디">
+                <div class="invalid-feedback feedback" id="feedbackId">
+                    다시 확인해주세요
+                </div>
+                <div class="valid-feedback feedback">
+                    사용 가능한 아이디
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <!-- 비밀번호 -->
+                <input type="password" id="pwd" class="form-control"
+                    placeholder="비밀번호 (영소대문자, 숫자, 특수문자 조합)">
+                <div class="invalid-feedback feedback">
+                    다시 확인해주세요
+                </div>
+                <div class="valid-feedback feedback">
+                    사용 가능한 비밀번호
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <!-- 비밀번호 확인 -->
+                <input type="password" id="pwdCk" class="form-control"
+                    placeholder="비밀번호 확인">
+                <div class="invalid-feedback feedback">
+                    다시 확인해주세요
+                </div>
+                <div class="valid-feedback feedback">
+                    동일한 비밀번호
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                <!-- 명 -->
+                <input type="text" id="memberName" class="form-control" placeholder="이름">
+                <div class="invalid-feedback feedback">
+                    이름을 입력
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-dark btn-block btn-lg" id="submit">회원 가입</button>
+    </div>
 
 </div>
 
 <script>
 
 $(()=>{
-    const root = 'content div#contents div#memberEnroll ';
-    let $submit = $(root + '#submit');
-    let $memberId = $(root + '#memberId');
-    let $pwd = $(root + "#pwd");
-    let $pwd_ck = $(root + "#pwd_ck");
-    let $memberName = $(root + "#memberName");
-    let $idValid = $(root + "#idValid");
-    let $msgValidId = $(root + "#msg-valid-id");
+    const root = 'div#memberEnroll ';
+    const $memberId = $(root + "#memberId");
+    const $pwd = $(root + "#pwd");
+    const $pwdCk = $(root + "#pwdCk");
+    const $memberName = $(root + "#memberName");
+    const $submit = $(root + "#submit");
+    let idValid = false;
 
-//  정규식
-    let reg_id = /^[a-z]+[a-z0-9]{5,16}$/g; // 영문 시작 숫자 조합 6 ~ 16
-    let reg_pwd = /^.*(?=^.{7,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; //특문 + 영문자 대 + 소 + 숫자 8 ~ 16
-    let reg_name = /^[가-힣]{2,4}$/;    // 한글 2 ~ 4
+    $memberId.change(()=>{
+        var memberId = $memberId.val();
 
-    $memberId.keyup(()=>{
-        idValidCheck();
+        if(getRegExp('id').test(memberId)){
+            idValidCheck(memberId);
+        }
+
     });
 
     $submit.click(()=>{
-        
-        if(!reg_id.test($memberId.val())){
-            alert("ID - 영문 시작 숫자 조합 6 ~ 16");
-            $memberId.focus();
+
+        if(!getRegExp('id').test($memberId.val())){
+            alert('잘못된 아이디');
             return;
         }
-
-        if($idValid.val() == 0){
-            alert("중복된 아이디입니다.");
-            $memberId.focus();
+        if(!idValid){
+            alert('중복된 아이디');
             return;
         }
-
-        if(!reg_pwd.test($pwd.val())){
-            alert("Password - 특문 + 영문자 대 + 소 + 숫자 8 ~ 16");
-            $pwd.focus();
+        if(!getRegExp('pwd').test($pwd.val())){
+            alert('잘못된 비밀번호')
             return;
         }
-
-        if($pwd.val() !== $pwd_ck.val()){
-            alert("서로 다른 비밀번호");
-            $pwd.focus();
+        if($pwd.val() !== $pwdCk.val()){
+            alert('같지 않은 비밀번호')
             return;
         }
-
-        if(!reg_name.test($memberName.val())){
-            alert("잘못된 이름");
-            $memberName.focus();
+        if(!getRegExp('name').test($memberName.val())){
+            alert('잘못된 이름')
             return;
         }
 
@@ -79,70 +117,52 @@ $(()=>{
             memberId : $memberId.val(),
             password : $pwd.val(),
             memberName : $memberName.val()
-        };
+        }
+
+        submit(member);
+    });
 
 
+    // 아이디 중복 검사
+    function idValidCheck(memberId) {
+        $.ajax({
+            url: '${pageContext.request.contextPath}/member/idDuplicate',
+            data: { memberId: memberId },
+            dataType: 'json',
+            success: (data) => {
+                idValid = data == 0;
+                console.log(idValid);
+            },
+            error: (x, s, e) => {
+                console.log(a, b, c);
+            }
+        });
+    }
+
+    // 회원 가입
+    function submit(member) {
         $.ajax({
             url: '${pageContext.request.contextPath}/member/memberEnrollEnd',
             data: member,
             dataType: 'json',
             success: (data) => {
                 console.log(data);
-                
-                if(data != 0) 
+
+                if (data != 0)
                     alert('회원 가입 성공');
                 else
                     alert('회원 가입 실패')
             },
-            error: (x,s,e) =>{
-                console.log(a,b,c);
+            error: (x, s, e) => {
+                console.log(a, b, c);
             },
             complete: (data) => {
                 location.href = '${pageContext.request.contextPath}/';
             }
         });
-    });
-
-    // 아이디 중복 검사
-    function idValidCheck(){
-
-        var memberId = $memberId.val();
-
-        if(memberId.trim().length > 6){
-
-            if(reg_id.test(memberId)){
-
-                $.ajax({
-                    url: '${pageContext.request.contextPath}/member/idDuplicate',
-                    data: {memberId : memberId},
-                    dataType: 'json',
-                    success: (data) => {
-                        console.log(data);
-
-                        if (data == 0){
-                            $msgValidId.text("사용 가능한 아이디");
-                            $idValid.val(1);
-                            return;
-                        }
-                        else{
-                            $msgValidId.text("사용중인 아이디");
-                        }
-                    },
-                    error: (x, s, e) => {
-                        console.log(a, b, c);
-                    }
-                });
-
-            }
-        }
-        else{
-            $msgValidId.text('');
-        }
-        $idValid.val(0);
     }
 
 });
-
 </script>
 
 <!-- ===================== Basic Setting ===================== -->
