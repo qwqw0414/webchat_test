@@ -40,8 +40,15 @@
                     <a class="nav-link" href="#">menu2</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">menu3</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        JS 테스트
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/jse/sudoku">스도쿠 자동완성</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/jse/regexp">정규식 테스트</a>
+                    </div>
                 </li>
 
                 <li class="nav-item">
