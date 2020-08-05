@@ -106,7 +106,7 @@ $(() => {
         }
     }
 
-    setTempData(tempSudoku);
+    // setTempData(tempSudoku);
 
     function getData() {
         var $cell = $("#inputTable .cell");
