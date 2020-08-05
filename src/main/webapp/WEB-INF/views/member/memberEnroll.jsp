@@ -16,7 +16,7 @@
                     다시 확인해주세요
                 </div>
                 <div class="valid-feedback feedback">
-                    사용 가능한 아이디
+                    사용 가능한 아이디임
                 </div>
             </div>
         </div>
