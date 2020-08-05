@@ -1,7 +1,12 @@
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%
+	Map<String, String> memberLoggedIn = (Map<String, String>)request.getSession().getAttribute("memberLoggedIn");
+%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -23,7 +28,15 @@
 <header>
 <!-- Header Start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/">WebChat</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+            WebChat <% 
+            	if(memberLoggedIn != null) {
+            %>
+            	<%memberLoggedIn.get("MEMBER_NAME"); %>
+            <%
+            	}
+            %>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

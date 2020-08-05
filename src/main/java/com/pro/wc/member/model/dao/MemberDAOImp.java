@@ -25,6 +25,11 @@ public class MemberDAOImp implements MemberDAO{
 	public int countMemberId(String memberId) throws Exception {
 		return sst.selectOne("member.countMemberId", memberId);
 	}
+
+	@Override
+	public Map<String, String> selectOneMember(Map<String, String> param) throws Exception {
+		return sst.selectOne("member.selectOneMember", param);
+	}
 	
 	
 }

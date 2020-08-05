@@ -53,7 +53,7 @@
         <div class="row h-100">
             <div class="col-sm-12 my-auto">
                 <div class="text-center">
-                    <p class="title" id="curtainCall">Go to the FireTower</p>
+                    <p class="title" id="curtainCall">I</p>
                 </div>
             </div>
         </div>

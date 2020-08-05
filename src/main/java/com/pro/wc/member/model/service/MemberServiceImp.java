@@ -26,5 +26,10 @@ public class MemberServiceImp implements MemberService{
 	public int countMemberId(String memberId) throws Exception {
 		return md.countMemberId(memberId);
 	}
+
+	@Override
+	public Map<String, String> selectOneMember(Map<String, String> param) throws Exception {
+		return md.selectOneMember(param);
+	}
 	
 }

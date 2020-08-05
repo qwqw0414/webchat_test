@@ -10,10 +10,11 @@
 
 	<!-- 아이디 갯수 검색 -->
 	<select id="countMemberId" resultType="_int" parameterType="string">
-			
 		select count(*) from member where member_id = #{memberId}
-	
 	</select>
 	
+	<select id="selectOneMember" resultType="map" parameterType="map">
+		select * from member where member_id = #{memberId}
+	</select>
 	
 </mapper>

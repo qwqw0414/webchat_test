@@ -3,6 +3,10 @@ package com.pro.wc.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.pro.wc.member.model.service.MemberService;
@@ -47,6 +52,36 @@ public class MemberController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "loginValidCheck", produces = "text/plain;charset=UTF-8")
+	public String loginValidCheck(String memberId, String password, HttpSession session) {
+		
+		Map<String, String> member = null;
+		String result = "false";
+		
+		try {
+	//		비밀번호 암호화
+			Map<String, String> param = new HashMap<>();
+			param.put("memberId", memberId);
+			
+			log.debug(param.toString());
+			
+			member = ms.selectOneMember(param);
+			
+			if(passwordEncoder.matches(password, member.get("PASSWORD"))) {
+				session.setAttribute("memberLoggedIn", member);
+				result = "true";
+			}
+			
+			log.debug(member.toString());
+			
+		} catch (Exception e) {
+			log.error("로그인 오류");
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "memberEnrollEnd", produces = "text/plain;charset=UTF-8")
 	public String memberEnrollEnd(String memberId, String password, String memberName) {
 
@@ -72,4 +107,9 @@ public class MemberController {
 		return String.valueOf(result);
 	}
 
+	
+	@RequestMapping("memberLogin")
+	public void memberLogin() {
+	}
+	
 }

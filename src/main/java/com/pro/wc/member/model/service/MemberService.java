@@ -8,4 +8,6 @@ public interface MemberService {
 
 	int countMemberId(String memberId) throws Exception;
 
+	Map<String, String> selectOneMember(Map<String, String> param) throws Exception;
+
 }
