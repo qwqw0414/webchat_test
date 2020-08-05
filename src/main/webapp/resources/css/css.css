@@ -5,6 +5,7 @@
 @font-face{font-family:'LAB디지털';src: url('/resources/css/font/LAB디지털.ttf');}
 @font-face{font-family:'Typo_DecoSolidSlash';src: url('/resources/css/font/Typo_DecoSolidSlash.ttf');}
 @font-face{font-family:'NanumSquare_acB';src: url('/resources/css/font/NanumSquare_acB.ttf');}
+@font-face{font-family:'Jua';src: url('/resources/css/font/Jua-Regular.ttf');}
 
 
 /* Contents */
@@ -21,11 +22,9 @@ footer > div#footer{
 
 /* member */
 div#contents > div#memberEnroll{
-
     width: 500px;
     padding-top: 150px;
     margin: auto;
-
 }
 
 /* jse */
