@@ -7,7 +7,6 @@
 <style>
 .curtain{
     position: absolute;
-    z-index: 9999;
     width: 100%;
     height: 100vh;
     background-color: rgb(48, 48, 48);
