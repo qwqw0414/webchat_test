@@ -35,8 +35,6 @@ public class AdminController {
 		List<Map<String,String>>list = null;
 		
 		list = as.selectAllMember();
-		log.debug(list+"");
-		
 		
 		return gson.toJson(list);
 	}
